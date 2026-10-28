@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { pub, img, inr } from "@/lib/db";
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 export default async function Home() {
-  const { data } = await pub().from("products").select("handle,title,type,variants(price,stock),product_images(file_name,position)").order("sort_order");
+  const { data, error } = await pub().from("products").select("handle,title,type,variants(price,stock),product_images(file_name,position)").order("sort_order");
+  if (error) return <section className="hero"><h1>The shop is not loading</h1><p className="err">{error.message}</p></section>;
   const list = data || [];
   return (
     <>
