@@ -3,7 +3,7 @@ import { pub, img, inr } from "@/lib/db";
 export const dynamic = "force-dynamic";
 export default async function Home() {
   const { data, error } = await pub().from("products").select("handle,title,type,variants(price,stock),product_images(file_name,position)").order("sort_order");
-  if (error) return <section className="hero"><h1>The shop is not loading</h1><p className="err">{error.message}</p></section>;
+  if (error) return <section className="hero"><h1>The shop is not loading</h1><p className="err">{error.message} (project: {new URL(process.env.NEXT_PUBLIC_SUPABASE_URL || "http://missing").host})</p></section>;
   const list = data || [];
   return (
     <>
