@@ -1,4 +1,4 @@
-:root{--ink:#1B1B3A;--red:#FF2E63;--lime:#D7FF3C;--sky:#CFE3FF;--pink:#FFB8D0}
+:root{--ink:#1B1B3A;--red:#FF2E63;--lime:#D7FF3C;--sky:#CFE3FF;--pink:#FFB8D0;--font-display:'Unbounded';--font-body:'Figtree'}
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-body),sans-serif;color:var(--ink);background:var(--sky)}
 h1,h2,h3{font-family:var(--font-display),sans-serif;margin:0;line-height:1;font-weight:800}
