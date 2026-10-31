@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { pub } from "@/lib/db";
+import { SEL, shape } from "@/lib/shop";
 import Buy from "@/components/Buy";
+import ProductCard from "@/components/ProductCard";
 export const revalidate = 60;
 export async function generateMetadata({ params }) {
   const { data } = await pub().from("products").select("title,description").eq("handle", params.handle).maybeSingle();
@@ -11,5 +13,13 @@ export default async function Product({ params }) {
   if (!p) notFound();
   p.variants.sort((a, b) => (a.color || "").localeCompare(b.color || ""));
   p.product_images.sort((a, b) => a.position - b.position);
-  return <Buy p={p} />;
+  const { data: all } = await pub().from("products").select(SEL).order("sort_order");
+  const me = shape(p);
+  const more = (all || []).map(shape).filter((x) => x.handle !== p.handle && x.cat === me.cat).slice(0, 4);
+  return (
+    <>
+      <Buy p={p} />
+      {more.length > 0 && <div className="w"><h2 className="sec" style={{ fontSize: 40 }}>You may also like</h2><div className="grid">{more.map((m, i) => <ProductCard key={m.handle} p={m} i={i} />)}</div></div>}
+    </>
+  );
 }

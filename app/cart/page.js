@@ -27,34 +27,36 @@ export default function CartPage() {
       }).open();
     } catch (x) { setErr(x.message); setBusy(false); }
   }
-  if (!items.length) return <section className="hero"><h1>Your cart is empty</h1><p><Link href="/" className="cta">Browse the collection</Link></p></section>;
+  if (!items.length) return <main className="w" style={{ paddingTop: 40 }}><h1 style={{ fontSize: "clamp(40px,6vw,88px)", marginBottom: 28 }}>Your cart is empty</h1><Link href="/shop" className="btn">Browse the collection</Link></main>;
   return (
-    <div className="cartwrap">
+    <main className="w" style={{ paddingTop: 40 }}>
       <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
-      <section>
-        <h1>Your cart</h1>
-        {items.map((x) => (
-          <div className="line" key={x.variantId}>
-            <div className="thumb">{x.image && <img src={img(x.image)} alt="" />}</div>
-            <div><strong>{x.title}</strong><div className="muted">{x.label} · {inr(x.price)}</div></div>
-            <div className="qty"><button onClick={() => setQty(x.variantId, x.qty - 1)} aria-label="Remove one">−</button> {x.qty} <button onClick={() => setQty(x.variantId, x.qty + 1)} aria-label="Add one">+</button></div>
-          </div>
-        ))}
-        <p className="total">Subtotal <strong>{inr(sub)}</strong></p>
-        <p className="muted">Any delivery charge is added at payment.</p>
-      </section>
-      <form onSubmit={pay}>
-        <h2>Delivery details</h2>
-        <label>Full name<input required value={f.name} onChange={set("name")} autoComplete="name" /></label>
-        <label>Phone (10 digits)<input required pattern="[0-9]{10}" inputMode="numeric" value={f.phone} onChange={set("phone")} autoComplete="tel-national" /></label>
-        <label>Email (optional)<input type="email" value={f.email} onChange={set("email")} autoComplete="email" /></label>
-        <label>Address<textarea required rows={3} value={f.address} onChange={set("address")} autoComplete="street-address" /></label>
-        <label>City<input value={f.city} onChange={set("city")} /></label>
-        <label>State<input value={f.state} onChange={set("state")} /></label>
-        <label>Pincode<input required pattern="[0-9]{6}" inputMode="numeric" value={f.pincode} onChange={set("pincode")} autoComplete="postal-code" /></label>
-        {err && <p className="err" role="alert">{err}</p>}
-        <button className="cta" disabled={busy}>{busy ? "Please wait…" : "Pay with Razorpay"}</button>
-      </form>
-    </div>
+      <h1 style={{ fontSize: "clamp(40px,6vw,88px)", marginBottom: 28 }}>Your cart</h1>
+      <div className="split">
+        <section>
+          {items.map((x) => (
+            <div className="box item" key={x.variantId}>
+              <div className="t" style={{ background: "#FFB8D0" }}>{x.image && <img className="photo" src={img(x.image)} alt="" />}</div>
+              <div style={{ flex: 1 }}><b>{x.title}</b><p className="muted" style={{ margin: "6px 0 0" }}>{x.label} · {inr(x.price)}</p>
+                <div className="links" style={{ marginTop: 10 }}><button className="pill" onClick={() => setQty(x.variantId, x.qty - 1)} aria-label="Remove one">−</button><span className="pill">{x.qty}</span><button className="pill" onClick={() => setQty(x.variantId, x.qty + 1)} aria-label="Add one">+</button></div></div>
+              <b>{inr(x.price * x.qty)}</b>
+            </div>
+          ))}
+          <div className="box" style={{ background: "var(--lime)" }}><p style={{ display: "flex", justifyContent: "space-between", margin: 0 }}>Subtotal <b>{inr(sub)}</b></p><p className="muted" style={{ margin: "8px 0 0" }}>Any delivery charge is added at payment.</p></div>
+        </section>
+        <form className="box" onSubmit={pay}>
+          <h2 style={{ fontSize: 28, marginBottom: 18 }}>Delivery details</h2>
+          <label>Full name<input required value={f.name} onChange={set("name")} autoComplete="name" /></label>
+          <label>Phone (10 digits)<input required pattern="[0-9]{10}" inputMode="numeric" value={f.phone} onChange={set("phone")} autoComplete="tel-national" /></label>
+          <label>Email (optional)<input type="email" value={f.email} onChange={set("email")} autoComplete="email" /></label>
+          <label>Address<textarea required rows={3} value={f.address} onChange={set("address")} autoComplete="street-address" /></label>
+          <label>City<input value={f.city} onChange={set("city")} /></label>
+          <label>State<input value={f.state} onChange={set("state")} /></label>
+          <label>Pincode<input required pattern="[0-9]{6}" inputMode="numeric" value={f.pincode} onChange={set("pincode")} autoComplete="postal-code" /></label>
+          {err && <p className="err" role="alert">{err}</p>}
+          <button className="btn" disabled={busy}>{busy ? "Please wait…" : "Pay with Razorpay"}</button>
+        </form>
+      </div>
+    </main>
   );
 }
