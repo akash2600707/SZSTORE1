@@ -115,3 +115,39 @@ tr.hl td{background:var(--lime);font-weight:800}
 .vrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 0;border-top:1px solid rgba(27,27,58,.15);margin-top:12px}
 .vrow .vname{flex:1 1 180px;font-weight:700}.vrow b{min-width:36px;text-align:center;font-size:20px}.vrow b.zero{color:var(--red)}.vrow b.low{color:#B45309}
 .vrow input{width:84px;margin:0;padding:10px}.vrow .btn{padding:10px 18px;font-size:15px;box-shadow:none}.vrow .pill{padding:8px 14px;background:#fff}
+/* ---- mobile polish ---- */
+.box svg,.arch svg,.hero-fb svg{width:100%;height:auto;display:block}
+.foot-grid a{display:block;padding:7px 0}
+.atable a{display:inline-block;padding:10px 0}.backlink{display:inline-block;padding:12px 0}
+.snd{padding:10px 16px}
+body:has(.sticky-buy) .foot{padding-bottom:104px}
+.sticky-buy{padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+@media(max-width:800px){
+  .strip{flex-wrap:nowrap;gap:0;padding:9px 16px;font-size:14px}.strip span:not(:first-child){display:none}
+  .nav{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 12px;padding:12px 0 8px}
+  .brand{order:1;padding:6px 0;display:inline-block}.act{order:2;flex-wrap:nowrap;gap:6px}.act .pill{padding:11px 14px;font-size:14px}
+  .catnav{order:3;grid-column:1/-1}
+  .scrollx,.catnav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding:0 20px 6px}
+  .scrollx::-webkit-scrollbar,.catnav::-webkit-scrollbar{display:none}.scrollx .pill,.catnav .pill{flex:none}
+  .pill.small{padding:11px 16px}
+  .item{flex-wrap:wrap}.item .t{width:84px}
+  .vrow .btn,.vrow .pill{flex:1 1 28%;min-height:44px;text-align:center}.vrow input{width:76px;min-height:44px}
+}
+@media(max-width:600px){
+  .grid,.cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.why{grid-template-columns:1fr}
+  .card b{font-size:14px;line-height:1.25}.card span,.card small{font-size:13px}
+  .t{border-radius:20px}.chip{font-size:11px;padding:3px 9px;top:8px;left:8px}
+  .sec{font-size:30px!important;margin:56px 0 20px!important}
+  main h1{font-size:clamp(28px,8vw,40px)!important}
+  .hero-copy{padding:24px 20px}.hero-copy h1{font-size:clamp(30px,9vw,40px)!important}.hero-copy .links .btn{flex:1 1 100%;text-align:center}
+  .hero2{min-height:min(78svh,620px);border-radius:28px}.eyebrow{font-size:12px}
+  .btn{padding:15px 22px;font-size:16px}.btn.buy{font-size:17px}
+  .catcard span{font-size:13px;padding:6px 12px}
+  .how,.igband{padding:24px;border-radius:28px;margin-top:56px}
+  .box{padding:20px;border-radius:22px}.foot{margin-top:56px}
+  .foot-grid>div:first-child{grid-column:1/-1}.foot-row{font-size:14px}
+}
+.foot-grid a{padding:10px 0}.ask{padding:12px 0}.item .links{flex-wrap:nowrap}
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stats .box{padding:12px}.stats b{font-size:24px}.stats span{font-size:12px;line-height:1.3}
+}

@@ -15,7 +15,7 @@ export default async function Order({ params, searchParams }) {
   const phone = String(o.phone || "").replace(/\D/g, "").slice(-10);
   return (
     <main style={{ paddingBottom: 40 }}>
-      <Link href="/admin" className="muted">← All orders</Link>
+      <Link href="/admin" className="muted backlink">← All orders</Link>
       <h1 style={{ fontSize: "clamp(32px,4vw,56px)", margin: "10px 0 16px" }}>{o.order_no} <span className={`badge ${o.status}`}>{NAME[o.status] || o.status}</span></h1>
       {searchParams?.m && <p className="note" role="status">{searchParams.m}</p>}
       <div className="split" style={{ paddingTop: 8 }}>
@@ -53,7 +53,7 @@ export default async function Order({ params, searchParams }) {
             </div>
             {!["cancelled", "delivered"].includes(o.status) && <details className="acc" style={{ marginTop: 14 }}><summary>Cancel this order</summary>
               <form action={cancelOrder}><input type="hidden" name="id" value={o.id} />
-                {["paid", "shipped"].includes(o.status) && <label style={{ display: "flex", gap: 10, alignItems: "center", fontWeight: 600 }}><input type="checkbox" name="restock" value="1" defaultChecked style={{ width: "auto", margin: 0 }} />Add the items back to stock</label>}
+                {["paid", "shipped"].includes(o.status) && <label style={{ display: "flex", gap: 10, alignItems: "center", fontWeight: 600 }}><input type="checkbox" name="restock" value="1" defaultChecked style={{ width: 22, height: 22, margin: 0 }} />Add the items back to stock</label>}
                 <p className="muted small">This does not refund the customer. Refund in the Razorpay dashboard, and cancel the shipment in Shiprocket if one exists.</p>
                 <button className="btn" style={{ marginBottom: 12 }}>Cancel order</button></form></details>}
           </section>

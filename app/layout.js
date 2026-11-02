@@ -2,6 +2,7 @@ import "./globals.css";
 import { CartProvider } from "@/components/Cart";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+export const viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#CFE3FF" };
 export const metadata = { title: "Seiszn – Women's western wear", description: "Small-batch western wear with exact measurements on every piece. Shipped across India." };
 export default function Layout({ children }) {
   return (

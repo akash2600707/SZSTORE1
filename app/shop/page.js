@@ -21,8 +21,8 @@ export default async function Shop({ searchParams }) {
         <label htmlFor="q" className="sr">Search pieces</label>
         <input id="q" name="q" defaultValue={q} placeholder="Search dresses, tops…" /><button className="btn alt" style={{ boxShadow: "none" }}>Search</button>
       </form>
-      <div className="links" style={{ margin: "8px 0 16px" }}>{TABS.map(([n, v]) => <Link key={n} className={`pill ${v === c ? "on" : ""}`} href={href({ c: v })}>{n}</Link>)}</div>
-      <div className="links" style={{ margin: "0 0 32px" }}>{SORTS.map(([n, v]) => <Link key={n} className={`pill small ${v === s ? "on" : ""}`} href={href({ s: v })}>{n}</Link>)}</div>
+      <div className="links scrollx" style={{ margin: "8px 0 16px" }}>{TABS.map(([n, v]) => <Link key={n} className={`pill ${v === c ? "on" : ""}`} href={href({ c: v })}>{n}</Link>)}</div>
+      <div className="links scrollx" style={{ margin: "0 0 32px" }}>{SORTS.map(([n, v]) => <Link key={n} className={`pill small ${v === s ? "on" : ""}`} href={href({ s: v })}>{n}</Link>)}</div>
       {error ? <p className="err">{error.message}</p> : list.length ? <div className="grid">{list.map((p, i) => <ProductCard key={p.handle} p={p} i={i} />)}</div> : <p>Nothing matches. <Link href="/shop" style={{ textDecoration: "underline" }}>See all pieces</Link>.</p>}
     </main>
   );
