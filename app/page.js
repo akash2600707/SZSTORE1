@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { pub } from "@/lib/db";
+import { admin } from "@/lib/db-server";
 import { SEL, TABS, shape } from "@/lib/shop";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
@@ -7,7 +7,7 @@ import Sketch from "@/components/Sketch";
 export const dynamic = "force-dynamic";
 const WHY = [["Exact measurements", "Bust, waist and length listed for every size. No S, M or L guessing."], ["Small batches", "Limited pieces, so you are unlikely to meet your outfit twice."], ["Delivered across India", "Secure Razorpay payment, tracked by Shiprocket, no signup needed."]];
 export default async function Home() {
-  const { data, error } = await pub().from("products").select(SEL).order("sort_order");
+  const { data, error } = await admin().from("products").select(SEL).order("sort_order");
   if (error) return <main className="w" style={{ padding: "48px 0" }}><h1>The shop is not loading</h1><p className="err">{error.message}</p></main>;
   const list = (data || []).map(shape);
   const cats = TABS.filter((t) => t[1]).map(([n, c]) => [n, c, list.find((p) => p.cat === c && p.image)]).filter((x) => list.some((p) => p.cat === x[1]));
