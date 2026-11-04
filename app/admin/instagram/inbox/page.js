@@ -14,11 +14,11 @@ export default async function InstagramInboxPage({ searchParams }) {
     .limit(100);
 
   return <main style={{ paddingBottom: 40 }}>
-    <div className="pagehead"><div><p className="muted small">INSTAGRAM AI</p><h1>Customer inbox</h1></div><Link className="pill" href="/admin/instagram">Back to Instagram AI</Link></div>
+    <div className="pagehead"><div><p className="muted small">SEISZN CUSTOMER CARE</p><h1>Instagram inbox</h1></div><Link className="pill" href="/admin/instagram">AI overview</Link></div>
     {searchParams?.m && <p className="note" role="status">{searchParams.m}</p>}
-    <p className="muted">Inbound messages will appear here after Meta webhooks are connected. You can organize conversations and flag cases that need a human response. Replies are not enabled yet.</p>
+    <p className="muted">One workspace for customer conversations, AI reply drafts and human handoff. AI drafts are not sent automatically until the Meta messaging connection and hybrid rules are enabled.</p>
     {error ? <p className="err">Could not load Instagram conversations: {error.message}</p> : data?.length ? <div className="box scroll"><table className="atable"><thead><tr><th>Customer</th><th>Last message</th><th>Received</th><th>Status / handoff</th></tr></thead><tbody>{data.map((item) => <tr key={item.id}>
-      <td>@{item.username || "Instagram customer"}</td>
+      <td><Link href={`/admin/instagram/inbox/${item.id}`}><b>@{item.username || "Instagram customer"}</b></Link></td>
       <td>{item.last_message || "—"}</td>
       <td>{ist(item.last_message_at)}</td>
       <td>
@@ -28,10 +28,10 @@ export default async function InstagramInboxPage({ searchParams }) {
           <select id={`status-${item.id}`} name="status" defaultValue={item.status} style={{ width: "100%", padding: 10, border: "2px solid var(--ink)", borderRadius: 12, marginBottom: 8 }}>
             <option value="open">Open</option><option value="waiting">Waiting</option><option value="resolved">Resolved</option>
           </select>
-          <button className="pill small" name="needs_human" value={item.needs_human ? "0" : "1"}>{item.needs_human ? "Clear human flag" : "Flag for human"}</button>
+          <button className="pill small" name="needs_human" value={item.needs_human ? "0" : "1"}>{item.needs_human ? "Resume AI" : "Take over"}</button>
         </form>
-        {item.needs_human && <span className="badge failed">Needs human</span>}
+        {item.needs_human && <span className="badge failed">Human takeover</span>}
       </td>
-    </tr>)}</tbody></table></div> : <section className="box"><p className="muted">No Instagram conversations have been received yet. Once the webhook is connected, new customer messages will be stored here.</p></section>}
+    </tr>)}</tbody></table></div> : <section className="box"><p className="muted">No Instagram conversations received yet. Connect the Meta webhook to start receiving customer messages.</p></section>}
   </main>;
 }
