@@ -36,11 +36,15 @@ Configure these in Vercel only after the Meta app exists:
 Do not use a `NEXT_PUBLIC_` prefix for either variable. Never commit their values.
 
 ### Meta callback URL
-Once the feature branch is reviewed and deployed, use this callback URL in Meta:
+For testing, use the callback URL from the active Preview deployment:
+
+`https://<active-preview-host>/api/instagram/webhook`
+
+Only after the changes are approved and deployed to Production should the callback be changed to:
 
 `https://szstore-1.vercel.app/api/instagram/webhook`
 
-Do not configure it in Meta until the corresponding deployment is live.
+Do not configure the callback until the corresponding deployment is Ready.
 
 ## Safety defaults
 - Automatic replies remain disabled.
