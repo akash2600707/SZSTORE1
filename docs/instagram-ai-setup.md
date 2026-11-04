@@ -47,16 +47,16 @@ Do not configure it in Meta until the corresponding deployment is live.
 - Publishing remains disabled.
 - No Meta tokens or AI API keys are committed.
 - The webhook only stores inbound text and attachment placeholders; it does not send replies.
+- Admins can create content drafts, move them through draft / pending approval / approved / rejected, update conversation status, and flag conversations for human follow-up.
 - The app does not contact customers proactively. Instagram conversations must be initiated by the customer and messaging must follow Meta's messaging rules.
 
 ## Remaining implementation
 1. Complete Meta Developer registration and create the app.
 2. Configure Instagram Login, permissions and webhook subscriptions.
 3. Implement OAuth connect/disconnect and secure token storage.
-4. Add inbox reply workflow with human escalation and Meta messaging-window enforcement.
-5. Add content drafting and explicit approval actions.
-6. Add publishing only after explicit approval and live testing.
-7. Add an AI provider only after its cost and free-tier limits are confirmed. If no suitable free inference route exists, keep manual templates and review queues rather than silently switching to a paid provider.
+4. Add the outbound inbox reply workflow with human escalation and Meta messaging-window enforcement.
+5. Add publishing only after explicit approval and live testing.
+6. Add an AI provider only after its cost and free-tier limits are confirmed. If no suitable free inference route exists, keep manual templates and review queues rather than silently switching to a paid provider.
 
 ## Cost policy
 The project targets zero monthly software subscription costs. It does not promise unlimited free inference, hosting, storage or API usage. Meta API access is subject to Meta's permissions, review and policy requirements.
